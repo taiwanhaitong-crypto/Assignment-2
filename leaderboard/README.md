@@ -1,5 +1,6 @@
 # Leaderboard
 
-**评分写在哪里：** 报告里的**评分表**在 **README.md** 的 **「Results and Analysis」→「Performance Analysis (评分)」** 小节，即对 ATE RMSE、RPE Trans Drift、RPE Rot Drift、Completeness 填数值和 Grade 的那张表。数据用 evo 对 ground truth 与估计轨迹做评估得到。
+**Where is the “score” written?**  
+The main score table lives in the **`README.md`** under **“Results and Analysis → Performance Analysis”** – that is where ATE RMSE, RPE Trans Drift, RPE Rot Drift and Completeness (plus grades) are reported. The numbers come from running evo on the ground-truth trajectory and the estimated trajectory.
 
-本文件夹用于**向课程 leaderboard 提交**（若课程要求）：填写 `submission_template.json`，按 `LEADERBOARD_SUBMISSION_GUIDE.md` 和课程说明提交。
+This folder is for **submissions to the course leaderboard** (if required): fill in `submission_template.json` and submit it according to `LEADERBOARD_SUBMISSION_GUIDE.md` and the course instructions.

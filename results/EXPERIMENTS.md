@@ -34,8 +34,8 @@ Baseline and YAML parameter changes for the HKisland Mono_Compressed demo.
 
 **Observations**
 
-- 相比 baseline，**地图点云明显更密、轨迹更平滑**，LOST / reset 次数略有减少，短时间遮挡后也更容易恢复。
-- Pangolin 窗口中特征点数目增多，终端输出中局部地图优化更频繁，**FPS 略有下降**（计算量增加）。
+- Compared with the baseline, the **map point cloud is visibly denser and the trajectory appears smoother**; LOST / reset events are slightly fewer and short occlusions are handled more robustly.
+- The Pangolin viewer shows more feature points and the terminal reports more frequent local-map optimisations; **FPS decreases slightly** due to the increased feature-processing cost.
 
 **Evidence**
 
@@ -53,8 +53,8 @@ Baseline and YAML parameter changes for the HKisland Mono_Compressed demo.
 
 **Observations**
 
-- 相比 baseline，**帧率略有提升**（每帧金字塔层数减少，计算量下降），终端日志中每秒处理帧数更高。
-- 但在视距变化较大或摄像机快速前进的路段，**更容易出现 LOST，偶尔需要 reset / 新地图**，轨迹在这些位置略有抖动，稳定性略差于 Experiment A。
+- Compared with the baseline, the **frame rate is slightly higher** (fewer pyramid levels per frame, so less computation) and the logs show more frames processed per second.
+- However, when there are large scale changes or fast forward motion, the system **is more prone to LOST events and occasional resets / new maps**; in those segments the trajectory is more jittery and overall slightly less stable than in Experiment A.
 
 **Evidence**
 

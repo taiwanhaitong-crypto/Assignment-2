@@ -140,29 +140,29 @@ If the container does not exist, create it with `.\scripts\00_recreate_container
 
 Full text: `docs/EXPERIMENTS.md`.
 
-### Performance Analysis (评分)
+### Performance Analysis
 
-示例仓库中的**评分**写在本小节：用 evo 得到 ATE / RPE / Completeness 后，在下面表格中填写数值并给出等级（Grade）。若你尚未用 ground truth 跑 evo，可先保留 N/A，或按课程要求填写。
+This section mirrors the evaluation style used in the reference repository: ATE, RPE (translation/rotation drift), and completeness, with informal “grades” for readability only.
 
 | Metric | Value | Grade | Interpretation |
 |--------|-------|-------|-----------------|
-| **ATE RMSE** | **2.0069 m** | **B** | Global trajectory error after Sim(3) alignment (KeyFrameTrajectory，误差在 ~2 m 量级) |
-| **RPE Trans Drift** | **1.9044 m/m** | **D** | Translation drift per meter (delta=10 m)，局部平移漂移较大 |
-| **RPE Rot Drift** | **126.96 deg/100m** | **F** | Rotation drift per 100 m，航向漂移较大 |
-| **Completeness** | **27.21% (532 / 1955)** | **F** | Fraction of sequence evaluated；本镜像仅输出 KeyFrameTrajectory，导致完成度显著低于参考 CameraTrajectory (~87%) |
+| **ATE RMSE** | **2.0069 m** | **B** | Global trajectory error after Sim(3) alignment using `KeyFrameTrajectory.txt` (error on the order of ~2 m). |
+| **RPE Trans Drift** | **1.9044 m/m** | **D** | Translation drift per meter (delta = 10 m); indicates relatively large local translational drift. |
+| **RPE Rot Drift** | **126.96 deg/100m** | **F** | Rotation drift per 100 m; heading drift is large compared with the reference implementation. |
+| **Completeness** | **27.21% (532 / 1955)** | **F** | Fraction of ground-truth poses evaluated. This run uses `KeyFrameTrajectory.txt` only; the image does not reliably output `CameraTrajectory.txt`, so completeness is much lower than the reference (~87% with CameraTrajectory). |
 
-**如何得到上表数据（在哪评）：**
+**How these numbers are obtained (where the evaluation runs):**
 
-1. **准备 ground truth**：从 bag 或课程提供的 RTK 数据得到 TUM 格式的 `ground_truth.txt`。
-2. **准备估计轨迹**：参考案例要求用 **CameraTrajectory.txt**（全帧轨迹，约 2800+ 条 pose）才能得到高完成度（~87%）；用 **KeyFrameTrajectory.txt**（仅关键帧，约 500+ 条）会严重拉低完成度（~27%）。见 `docs/completeness_and_trajectory_file.md`。
-3. **在 WSL/Linux 或 Docker 内安装 evo**，然后运行：
+1. **Ground truth**: RTK trajectory exported in TUM format as `ground_truth.txt` (provided in the image under `/root/ORB_SLAM3/ground_truth.txt` and copied to `output/ground_truth.txt`).  
+2. **Estimated trajectory**: This repository evaluates **`expA_KeyFrameTrajectory.txt`** (Experiment A, keyframe-only trajectory). The reference repo evaluates **`CameraTrajectory.txt`** (all tracked frames), which explains the higher completeness there; see `docs/completeness_and_trajectory_file.md`.  
+3. **Running evo inside Docker** (via `scripts/05_run_evaluation_in_docker.ps1`, which calls `evaluate_vo_accuracy.py`):  
    ```bash
    evo_ape tum ground_truth.txt CameraTrajectory.txt --align --correct_scale --t_max_diff 0.1 -va
    evo_rpe tum ground_truth.txt CameraTrajectory.txt --align --correct_scale --t_max_diff 0.1 --delta 10 --delta_unit m --pose_relation trans_part -va
    evo_rpe tum ground_truth.txt CameraTrajectory.txt --align --correct_scale --t_max_diff 0.1 --delta 10 --delta_unit m --pose_relation angle_deg -va
    ```
-4. 把 evo 输出的 RMSE、RPE 均值、匹配 pose 数填到上表，并按课程标准或自定档次给出 **Grade**。  
-**评分位置**：即本 README 的 **「Results and Analysis」→「Performance Analysis (评分)」** 表格；若课程有 leaderboard，则到 `leaderboard/` 按说明提交。
+4. The script parses evo’s JSON outputs and writes `output/metrics.json`, then the values are copied into the table above.  
+The official “score sheet” for the course is this **Performance Analysis** table plus the JSON file in `leaderboard/` (see `leaderboard/LEADERBOARD_SUBMISSION_GUIDE.md`).
 
 ---
 
