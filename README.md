@@ -175,6 +175,36 @@ The official “score sheet” for the course is this **Performance Analysis** t
 | `figures/expA_map.png`, `figures/expA_image.png` | Experiment A |
 | `figures/expB_map.png`, `figures/expB_image.png` | Experiment B |
 
+### Baseline run
+
+**Map / trajectory view**
+
+![Baseline trajectory (Map Viewer)](figures/baseline_map.png)
+
+**Current frame view**
+
+![Baseline current frame](figures/baseline_image.png)
+
+### Experiment A — More ORB features (`nFeatures = 2500`)
+
+**Map / trajectory view**
+
+![Experiment A trajectory (Map Viewer)](figures/expA_map.png)
+
+**Current frame view**
+
+![Experiment A current frame](figures/expA_image.png)
+
+### Experiment B — Fewer pyramid levels (`nLevels = 6`)
+
+**Map / trajectory view**
+
+![Experiment B trajectory (Map Viewer)](figures/expB_map.png)
+
+**Current frame view**
+
+![Experiment B current frame](figures/expB_image.png)
+
 ---
 
 ## Discussion
