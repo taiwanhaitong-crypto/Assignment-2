@@ -1,0 +1,10 @@
+{
+  "group_name": "填写你的小组名",
+  "project_private_repo_url": "https://github.com/你的用户名/你的仓库名.git",
+  "metrics": {
+    "ate_rmse_m": 2.0069440242381003,
+    "rpe_trans_drift_m_per_m": 1.9043952394780557,
+    "rpe_rot_drift_deg_per_100m": 126.96173320781253,
+    "completeness_pct": 27.21227621483376
+  }
+}

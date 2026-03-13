@@ -1,0 +1,5 @@
+# Optional: for trajectory evaluation with evo (run inside WSL/Linux or conda)
+# evo
+# numpy
+# matplotlib
+# pandas

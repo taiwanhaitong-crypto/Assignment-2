@@ -1,0 +1,6 @@
+{
+  "dataset": "HKisland_GNSS03",
+  "config": "config/HKisland_Mono.yaml",
+  "runs": ["baseline", "expA_nFeatures2500", "expB_nLevels6"],
+  "note": "Optional: add evo metrics (ATE RMSE, RPE, completeness) here if you run trajectory evaluation."
+}
